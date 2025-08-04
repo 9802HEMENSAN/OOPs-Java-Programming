@@ -13,7 +13,7 @@ Overrides the Display_Account_Detail() method
 Each account has accountNumber, accountHolderName, and balance.
 Savings accounts may have an interestRate.
 */
-
+import java.util.Scanner;
 // Base class: Account
 class Account {
     protected String accountNumber;
@@ -35,8 +35,8 @@ class Account {
     }
 
     // Method to return account balance
-    public double Account_Balance() {
-        return balance;
+    public void Account_Balance() {
+        System.out.println("Current Balance: $" + balance);
     }
 }
 
@@ -58,36 +58,32 @@ class SavingAccount extends Account {
     }
 }
 
-// Test class with main method
+ // Main class with CLI
 public class BankSystem {
     public static void main(String[] args) {
-        // Create a generic account
-        Account acc = new Account("ACC123", "Alice Johnson", 2500.00);
-        System.out.println("=== Account Details ===");
-        acc.Display_Account_Detail();
-        System.out.println("Account Balance: $" + acc.Account_Balance());
+        Scanner scanner = new Scanner(System.in);
 
-        System.out.println();
+        System.out.println("=== Create Savings Account ===");
+        System.out.print("Enter Account Number: ");
+        String accNum = scanner.nextLine();
 
-        // Create a saving account
-        SavingAccount savAcc = new SavingAccount("SAV456", "Bob Smith", 5000.00, 3.5);
-        System.out.println("=== Saving Account Details ===");
-        savAcc.Display_Account_Detail();
-        System.out.println("Saving Account Balance: $" + savAcc.Account_Balance());
+        System.out.print("Enter Holder Name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter Initial Balance: ");
+        double balance = scanner.nextDouble();
+
+        System.out.print("Enter Interest Rate: ");
+        double rate = scanner.nextDouble();
+
+        SavingAccount savings = new SavingAccount(accNum, name, balance, rate);
+
+        System.out.println("\n=== Account Details ===");
+        savings.Display_Account_Detail();
+
+        System.out.println("\n=== Account Balance ===");
+        savings.Account_Balance();
+
+        scanner.close();
     }
 }
-/*  
-Output (Example)
-=== Account Details ===
-Account Number: ACC123
-Account Holder: Alice Johnson
-Balance: $2500.0
-Account Balance: $2500.0
-
-=== Saving Account Details ===
-Account Number: SAV456
-Account Holder: Bob Smith
-Balance: $5000.0
-Interest Rate: 3.5%
-Saving Account Balance: $5000.0
-*/

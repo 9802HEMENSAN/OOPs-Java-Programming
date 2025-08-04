@@ -26,9 +26,9 @@ class Matrix {
     public void displayMatrix() {
         for (int[] row : data) {
             for (int val : row) {
-                System.out.print(val + "\t");
+                System.out.print(val + " ");
             }
-            System.out.println();
+            System.out.println("\n");
         }
     }
 
